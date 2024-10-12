@@ -13,7 +13,7 @@
 	<header class="bg-primary p-4 text-primary-foreground fixed top-0 left-0 right-0 z-20">
         <nav class="container mx-auto flex items-center justify-between">
             <a href="/" class="text-2xl font-bold">
-				<img src="/src/lib/images/logo.png" alt="" class="h-8"/>
+				<img src="/src/lib/images/logo.svg" alt="" class="h-8"/>
 			</a>
             <div class="relative mx-auto self-center flex-1 grow-0 sm:block hidden">
                 <Search class="text-muted-foreground absolute left-2.5 top-2.5 h-4 w-4" />
