@@ -57,7 +57,7 @@
 </script>
 
 <svelte:head>
-	<title>🛒 SvelteCommerce</title>
+	<title>SvelteCommerce</title>
 	<style>
 		.banner-gradient::before {
 			content: '';
@@ -107,12 +107,13 @@
 		<h2 class="mb-6 text-2xl font-semibold">Featured Products</h2>
 		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-4">
 			{#each products as product}
-			<ProductCard 
+			<ProductCard
 				id={product.id}
-				name={product.title}
-				price={product.price} 
-				imageUrl={product.images[0]}
-				availabilityStatus={product.brand}
+				title={product.title}
+				price={product.price}
+				category={product.category}
+				image={product.images[0]}
+				brand={product.brand}
 			/>
 			{/each}
 		</div>
