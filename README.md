@@ -15,7 +15,7 @@ The tech store you can count on.
 
 <!-- ![Product Screenshot](https://picsum.photos/1920/1080) -->
 
-I finnally found some time to spend learning Svelte and SvelteKit, one of the most interesting frameworks at the moment. That's why I wanted to set up this mocked e-commerce site, taking it as a chance to prove my frontend skills. Hope you like it, enjoy the result 🙂
+I finally found some time to spend learning Svelte and SvelteKit, one of the most interesting frameworks at the moment. That's why I wanted to set up this mocked e-commerce site, taking it as a chance to prove my frontend skills. Hope you like it, enjoy the result 🙂
 
 ### Built With
 
