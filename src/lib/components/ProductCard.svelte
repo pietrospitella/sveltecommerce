@@ -1,18 +1,36 @@
 <script lang="ts">
-	import { goto } from "$app/navigation"
+	import { goto } from '$app/navigation'
 
-    export let id: number = 0;
-    export let imageUrl: string = "/placeholder.svg?height=300&width=300";
-    export let price: number = 34.00;
-    export let name: string = "Stripe Details Jersey Track Top";
-    export let availabilityStatus: string = "Men's shoes";
-  </script>
-  
-  <button on:click={() => goto(`/products/${id}`)} class="w-full sm:w-64 md:w-72 lg:w-80 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105" type="button">
-    <img src={imageUrl} alt={name} class="w-full h-48 sm:h-56 md:h-64 object-contain" />
-    <div class="p-4">
-      <p class="text-lg sm:text-xl font-bold">$ {price.toFixed(2)}</p>
-      <h3 class="text-sm sm:text-base font-medium line-clamp-2 h-10">{name}</h3>
-      <p class="text-xs sm:text-sm text-gray-500">{availabilityStatus}</p>
+	export let mode: 'grid' | 'list' = 'grid'
+	export let id: number = 0
+	export let category: string = 'Device'
+	export let image: string = '/placeholder.svg?height=300&width=300'
+	export let price: number = 34.0
+	export let title: string = 'Product Title'
+	export let brand: string = ''
+</script>
+
+<button on:click={() => goto(`/products/${id}`)} type="button" class="{mode === 'list' ? 'w-full' : ''}">
+  {#if mode === "grid"}
+    <div
+      class="w-full overflow-hidden rounded-xl bg-white transition-transform duration-300 hover:scale-105 sm:w-64 md:w-72 lg:w-80"
+    >
+      <img src={image} alt={title} class="h-48 w-full object-contain sm:h-56 md:h-64" />
+      <div class="p-4">
+        <p class="text-lg font-bold sm:text-xl">$ {price.toFixed(2)}</p>
+        <h3 class="line-clamp-2 h-10 text-sm font-medium sm:text-base">{title}</h3>
+        <p class="text-xs text-gray-500 sm:text-sm">{brand}</p>
+      </div>
     </div>
-  </button>
+  {:else}
+     <div class="rounded-lg p-4 flex items-center transition-transform duration-300 hover:scale-105">
+      <img src={image} alt={title} class="h-16 w-16 object-contain" />
+      <div class="text-left ml-4">
+        <h3 class="text-lg font-semibold">{title}</h3>
+        <p class="text-sm text-gray-600">{category}</p>
+        <p class="text-sm text-gray-600">{brand}</p>
+      </div>
+      <p class="text-lg font-bold ml-auto">${price.toFixed(2)}</p>
+      </div>
+  {/if}
+</button>
