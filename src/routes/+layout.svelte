@@ -9,6 +9,11 @@
 	import Badge from '$lib/components/ui/badge/badge.svelte'
 	import Button from '$lib/components/ui/button/button.svelte'
 	import { Tooltip, TooltipContent, TooltipTrigger } from '$lib/components/ui/tooltip'
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 
 	interface IProduct {
 		id: number
@@ -24,7 +29,7 @@
 		count: number
 	}
 
-	let cart: IProduct[] = []
+	let cart: IProduct[] = $state([])
 
 	function addToCart (product: IProduct, count: number) {
 		let cartProduct = {...product, count: count}
@@ -60,7 +65,7 @@
 						 <Badge variant="destructive" class="absolute -top-2 -right-2 text-xs w-4 h-4 p-1">{cart.length}</Badge>
 					{/if}
 				</PopoverTrigger>
-				<PopoverContent sideOffset={10} class="{cart.length > 0 ? 'w-auto' : ''}">
+				<PopoverContent sideOffset={10} class={cart.length > 0 ? 'w-auto' : ''}>
 					<h3 class="text-lg font-bold mb-4">Cart</h3>
 					{#if cart.length > 0}
 						{#each cart as cartItem, index}
@@ -71,7 +76,7 @@
 								<p class="text-xs text-gray-600">{cartItem.category} (x{cartItem.count})</p>
 							</div>
 							<p class="text-md font-bold ml-auto">${cartItem.price.toFixed(2) * cartItem.count}</p>
-						</div>	1
+						</div>
 						{/each}
 						<div class="flex gap-4 mt-4">
 							<Button><ShoppingCart class="mr-4"/>Checkout</Button>
@@ -88,8 +93,8 @@
 			
 		</nav>
 	</header>
-	<div class="mx-auto mt-[72px]">
-		<slot></slot>
+	<div class="mx-auto mt-[72px] min-h-screen">
+		{@render children?.()}
 	</div>
 	<footer class="mt-12 bg-primary p-4 text-primary-foreground">
 		<div class="container mx-auto text-center">

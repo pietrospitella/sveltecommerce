@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { Button } from '$lib/components/ui/button'
 	import { Input } from '$lib/components/ui/input'
 	import { Label } from '$lib/components/ui/label'
@@ -9,9 +11,9 @@
 	import { goto } from '$app/navigation'
 	import { Skeleton } from '$lib/components/ui/skeleton'
 
-	let isLoaded = false
-	let isGridView = true
-	let activeFilters: Filter[] = []
+	let isLoaded = $state(false)
+	let isGridView = $state(true)
+	let activeFilters: Filter[] = $state([])
 
 	interface IProduct {
 		id: number
@@ -31,7 +33,7 @@
 		active: string[]
 	}
 
-	let filters: Filter[] = [
+	let filters: Filter[] = $state([
 		{ category: 'Category', options: ['smartphones', 'laptops', 'tablets'], active: [] },
 		{ category: 'Brand', options: ['Apple', 'Samsung', 'Oppo', 'Realme', 'Vivo'], active: [] },
 		{
@@ -39,9 +41,9 @@
 			options: ['Under $50', '$50 - $100', '$100 - $200', 'Over $200'],
 			active: []
 		}
-	]
+	])
 
-	let products: IProduct[] = []
+	let products: IProduct[] = $state([])
 
 	function toggleFilter(category: string, option: string) {
 		filters = filters.map((filter) => {
@@ -69,11 +71,13 @@
 		filters = filters.map((filter) => ({ ...filter, active: [] }))
 	}
 
-	$: activeFilters = filters.flatMap((filter) =>
-		filter.active.map((option) => ({ category: filter.category, option }))
-	)
+	run(() => {
+		activeFilters = filters.flatMap((filter) =>
+			filter.active.map((option) => ({ category: filter.category, option }))
+		)
+	});
 
-	$: filteredProducts = products.filter((product) => {
+	let filteredProducts = $derived(products.filter((product) => {
 		const matchesSearch = product.title.toLowerCase()
 		const matchesFilters = filters.every((filter) => {
 			if (filter.active.length === 0) return true
@@ -94,7 +98,7 @@
 			}
 		})
 		return matchesSearch && matchesFilters
-	})
+	}))
 
 	onMount(() => {
 		let response

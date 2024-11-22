@@ -11,7 +11,7 @@
 	import CarouselPrevious from '$lib/components/ui/carousel/carousel-previous.svelte'
 	import CarouselNext from '$lib/components/ui/carousel/carousel-next.svelte'
 
-    let products: any = []
+    let products: any = $state([])
 
 	const banners = [
 		{
@@ -90,9 +90,9 @@
 					<!-- <AspectRatio ratio={16 / 9} class="bg-muted"> -->
 						<img src={banner.img} alt={`Banner ${banner.title}`} class="h-full w-full object-cover" />
 					<!-- </AspectRatio> -->
-					<div class="absolute top-0 w-full h-full flex justify-center items-start p-20 flex-col z-10 text-white">
-						<h2 class="mb-4 text-4xl font-bold">{banner.title}</h2>
-						<p class="mb-6 text-xl">{banner.sub}</p>
+					<div class="absolute top-0 w-full h-full flex flex-col justify-center items-center p-4 z-10 text-white">
+						<h2 class="mb-4 text-4xl font-bold text-center">{banner.title}</h2>
+						<p class="mb-6 text-xl text-center">{banner.sub}</p>
 						<Button variant="secondary" size="lg" on:click={banner.cta.fn}>{banner.cta.text}</Button>
 					</div>
 				</CarouselItem>

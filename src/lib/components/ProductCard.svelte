@@ -1,16 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 
-	export let mode: 'grid' | 'list' = 'grid'
-	export let id: number = 0
-	export let category: string = 'Device'
-	export let image: string = '/placeholder.svg?height=300&width=300'
-	export let price: number = 34.0
-	export let title: string = 'Product Title'
-	export let brand: string = ''
+  interface Props {
+    mode?: 'grid' | 'list';
+    id?: number;
+    category?: string;
+    image?: string;
+    price?: number;
+    title?: string;
+    brand?: string;
+  }
+
+  let {
+    mode = 'grid',
+    id = 0,
+    category = 'Device',
+    image = '/placeholder.svg?height=300&width=300',
+    price = 34.0,
+    title = 'Product Title',
+    brand = ''
+  }: Props = $props();
 </script>
 
-<button on:click={() => goto(`/products/${id}`)} type="button" class="{mode === 'list' ? 'w-full' : ''}">
+<button onclick={() => goto(`/products/${id}`)} type="button" class="{mode === 'list' ? 'w-full' : ''}">
   {#if mode === "grid"}
     <div
       class="w-full overflow-hidden rounded-xl bg-white transition-transform duration-300 hover:scale-105 sm:w-64 md:w-72 lg:w-80"

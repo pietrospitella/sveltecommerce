@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { page } from '$app/stores'
 	import { Button } from '$lib/components/ui/button'
 	import Input from '$lib/components/ui/input/input.svelte'
@@ -6,22 +8,25 @@
 	import { Heart, ShoppingCart, Truck, Minus, Plus } from 'lucide-svelte'
 	import { getContext, onMount } from 'svelte'
 
-	$: product = {
-		id: 0,
-		title: '',
-		category: '',
-		description: '',
-		brand: '',
-		price: 0,
-		rating: 0,
-		reviews: [],
-		images: [],
-		shippingInformation: ''
-	}
+	let product;
+	run(() => {
+		product = {
+			id: 0,
+			title: '',
+			category: '',
+			description: '',
+			brand: '',
+			price: 0,
+			rating: 0,
+			reviews: [],
+			images: [],
+			shippingInformation: ''
+		}
+	});
 
-	let isLoaded = false
-	let count = 1
-	let bigImage = ''
+	let isLoaded = $state(false)
+	let count = $state(1)
+	let bigImage = $state('')
 	let cartFn: any = getContext('addToCart')
 
 	function addToCart() {
@@ -74,7 +79,7 @@
 				/>
 				<div class="grid grid-cols-4 gap-4">
 					{#each product.images as img, index}
-						<button on:click={() => changeBigImg(index)}>
+						<button onclick={() => changeBigImg(index)}>
 							<img
 								src={img}
 								alt="Thumbnail {index}"
