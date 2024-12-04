@@ -93,7 +93,7 @@
 					<div class="absolute top-0 w-full h-full flex flex-col justify-center items-center p-4 z-10 text-white">
 						<h2 class="mb-4 text-4xl font-bold text-center">{banner.title}</h2>
 						<p class="mb-6 text-xl text-center">{banner.sub}</p>
-						<Button variant="secondary" size="lg" on:click={banner.cta.fn}>{banner.cta.text}</Button>
+						<Button variant="secondary" size="lg" onclick={banner.cta.fn}>{banner.cta.text}</Button>
 					</div>
 				</CarouselItem>
 			{/each}
@@ -112,8 +112,9 @@
 				title={product.title}
 				price={product.price}
 				category={product.category}
-				image={product.images[0]}
+				image={product.images[1]}
 				brand={product.brand}
+				rating={product.rating}
 			/>
 			{/each}
 		</div>

@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { page } from '$app/stores'
 	import { Button } from '$lib/components/ui/button'
 	import Input from '$lib/components/ui/input/input.svelte'
@@ -8,20 +6,17 @@
 	import { Heart, ShoppingCart, Truck, Minus, Plus } from 'lucide-svelte'
 	import { getContext, onMount } from 'svelte'
 
-	let product;
-	run(() => {
-		product = {
-			id: 0,
-			title: '',
-			category: '',
-			description: '',
-			brand: '',
-			price: 0,
-			rating: 0,
-			reviews: [],
-			images: [],
-			shippingInformation: ''
-		}
+	let product = $state({
+		id: 0,
+		title: '',
+		category: '',
+		description: '',
+		brand: '',
+		price: 0,
+		rating: 0,
+		reviews: [],
+		images: [],
+		shippingInformation: ''
 	});
 
 	let isLoaded = $state(false)
@@ -31,7 +26,6 @@
 
 	function addToCart() {
 		cartFn(product, count)
-		console.log('Added to cart')
 	}
 	function changeBigImg(idx: number) {
 		bigImage = product.images[idx]
@@ -137,7 +131,7 @@
 					<Button
 						variant="default"
 						disabled={count < 2}
-						on:click={() => {
+						onclick={() => {
 							if (count >= 2) {
 								count -= 1
 							}
@@ -156,7 +150,7 @@
 					<Button
 						variant="default"
 						disabled={count > 4}
-						on:click={() => {
+						onclick={() => {
 							if (count <= 4) {
 								count += 1
 							}
@@ -165,7 +159,7 @@
 						<Plus class="h-4 w-4" />
 					</Button>
 				</div>
-				<Button class="mb-4 w-full" on:click={addToCart}>
+				<Button class="mb-4 w-full" onclick={addToCart}>
 					<ShoppingCart class="mr-2 h-4 w-4" />
 					Add to cart
 				</Button>
@@ -192,7 +186,7 @@
 					<Button
 						variant="default"
 						disabled={count < 2}
-						on:click={() => {
+						onclick={() => {
 							if (count >= 2) {
 								count -= 1
 							}
@@ -211,7 +205,7 @@
 					<Button
 						variant="default"
 						disabled={count > 4}
-						on:click={() => {
+						onclick={() => {
 							if (count <= 4) {
 								count += 1
 							}
@@ -220,7 +214,7 @@
 						<Plus class="h-4 w-4" />
 					</Button>
 				</div>
-				<Button class="mb-4 w-full" on:click={addToCart}>
+				<Button class="mb-4 w-full" onclick={addToCart}>
 					<ShoppingCart class="mr-2 h-4 w-4" />
 					Add to cart
 				</Button>

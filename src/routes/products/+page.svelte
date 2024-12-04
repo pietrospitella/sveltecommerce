@@ -129,24 +129,24 @@
 						<Button
 							variant="outline"
 							size="sm"
-							on:click={() => clearFilter(filter.category, filter.option)}
+							onclick={() => clearFilter(filter.category, filter.option)}
 						>
 							{filter.category}: {filter.option}
 							<X class="ml-2 h-4 w-4" />
 						</Button>
 					{/each}
 					{#if activeFilters.length > 0}
-						<Button variant="outline" size="sm" on:click={clearAllFilters}>
+						<Button variant="outline" size="sm" onclick={clearAllFilters}>
 							Clear All Filters
 						</Button>
 					{/if}
 				</div>
 			</div>
 			<div class="flex gap-2">
-				<Button variant={isGridView ? 'default' : 'outline'} on:click={() => (isGridView = true)}>
+				<Button variant={isGridView ? 'default' : 'outline'} onclick={() => (isGridView = true)}>
 					<LayoutGrid class="mr-2 h-4 w-4" /> Grid
 				</Button>
-				<Button variant={!isGridView ? 'default' : 'outline'} on:click={() => (isGridView = false)}>
+				<Button variant={!isGridView ? 'default' : 'outline'} onclick={() => (isGridView = false)}>
 					<List class="mr-2 h-4 w-4" /> List
 				</Button>
 			</div>
@@ -164,7 +164,7 @@
 									<Checkbox
 										id={`${filter.category}-${option}`}
 										checked={filter.active.includes(option)}
-										on:click={() => toggleFilter(filter.category, option)}
+										onclick={() => toggleFilter(filter.category, option)}
 									/>
 									<Label for={`${filter.category}-${option}`} class="capitalize">{option}</Label>
 								</div>
@@ -187,6 +187,7 @@
 									category={product.category}
 									price={product.price}
 									brand={product.brand}
+									rating={product.rating}
 								/>
 							{/each}
 						</div>
@@ -201,6 +202,7 @@
 									category={product.category}
 									price={product.price}
 									brand={product.brand}
+									rating={product.rating}
 								/>
 							{/each}
 						</div>
